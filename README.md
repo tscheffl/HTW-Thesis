@@ -3,7 +3,7 @@ LaTeX Template für Abschlussarbeiten im Studiengang IKT der HTW-Berlin.de
 
 Die Vorlage ist für die Erstellung von Arbeiten in deutscher und englischer Sprache geeignet. Die Umstellung der Sprache erfolgt in der Datei `settings/adjustments.tex`
 
-In der Hauptdatei `thesis.tex` müssen die allgemeinen Angaben zum Author und Titel, usw. in die passenden Felder eingetragen werden. Die einzelnen Kapitel werden dann per `/include{}` importiert.
+In der Hauptdatei `Thesis.tex` müssen die allgemeinen Angaben zum Author und Titel, usw. in die passenden Felder eingetragen werden. Die einzelnen Kapitel werden dann per `/include{}` importiert.
 
 Um die Verzeichnisse (Literatur, Abkürzungen und Index) zu erstellen sind folgende Befehle und ein weiterer LaTeX Lauf notwendig:
   
