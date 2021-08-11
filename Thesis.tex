@@ -1,0 +1,114 @@
+%% Einstellungen und Anpassungen
+\input{settings/settings}  		% Import der Pakete und Stil de Dokuments
+\input{settings/adjustments} 	% Weitere Pakete und Anpassungen (Sprache, etc.)
+\input{settings/titlepage}		% Layout der Titelseite
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% In diesem Bereich müssen Sie Anpassungen für das Deckblatt der Arbeit vornehmen!
+%
+%% Titel und Author 
+\titel{Analyse, Planung und Implementierung einer internetfähigen Steuerung}
+\autor{Hans Maier}
+\matrikelnr{s1234567}
+%% Version und Abgabedatum
+\version{0.2$\alpha$} 	%ToDo: wird derzeit noch nicht genutzt
+\datum{07.04.2021}   	% Abgabedatum der Arbeit
+%% Typ der Arbeit
+\thesistyp{Masterarbeit}
+%\thesistyp{Bachelorarbeit}
+\abschluss{Master of Engineering (M. Eng.)}
+%\abschluss{Bachelor of Engineering (B. Eng.)}
+%% Betreuer
+\firstExaminer{Prof.~Dr. Thomas Scheffler}
+\secondExaminer{Maxi Mustermann}
+%% Fachbereich
+\fachbereich{1 -- Energie und Information --}
+\studiengang{Informations- und Kommunikationstechnik}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Pfad zu den Bildern
+\graphicspath{
+  {pictures/},
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Start des Dokuments
+\begin{document}
+
+%% Deckblatt erzeugen
+\maketitle
+
+%% Inhaltsverzeichnis erstellen
+\cleardoubleoddpage
+\pagenumbering{Roman}
+\tableofcontents \clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% In diesem Bereich müssen Sie Anpassungen für den Inhalt der Arbeit vornehmen!
+%% Kurzzusammenfassung
+\input{abstract_de.tex}
+\input{abstract_en.tex}
+\clearpage
+
+%% Hauptteil
+\cleardoubleoddpage
+\pagenumbering{arabic}
+
+
+\input{chapter/01_Einfuehrung.tex}
+\input{chapter/02_Grundlagen.tex}
+\input{chapter/03_Konzept.tex}
+\input{chapter/04_Implementierung.tex}
+\input{chapter/05_Tests.tex}
+\input{chapter/06_Fazit.tex}
+
+%% Anhang
+\cleardoubleoddpage
+\appendix
+\input{chapter/99_Anhang.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% Abkürzungsverzeichnis
+% Befehl: 	makeindex Thesis.nlo -s nomencl.ist -o Thesis.nls
+%
+\input{references/acronyms.tex}
+\cleardoublepage
+\markboth{\nomname}{\nomname}
+\printnomenclature
+
+%% Abbildungsverzeichnis
+\listoffigures \clearpage
+
+%% Tabellenverzeichnis
+\listoftables \clearpage
+
+%% Quelltextverzeichnis
+\lstlistoflistings \clearpage
+
+%% Stichwortverzeichnis
+% Befehl: 	makeindex thesis
+%
+\printindex \clearpage
+
+%% Literaturverzeichnis
+%
+% Befehl: biber thesis
+%
+\printbibliography[heading=bibintoc, title={\babel{Literaturverzeichnis}{Bibliography}}]\clearpage
+%Literaturverzeichnisse getrennt nach Stichwort
+%\printbibliography[heading=bibintoc, keyword={book}, title={Literaturverzeichnis}]\clearpage
+%\printbibliography[heading=bibintoc, keyword={online}, title={Onlinequellen}]\clearpage
+%\printbibliography[heading=bibintoc, keyword={image}, title={Bildquellen}]\clearpage
+
+%% Erklärung zur Eigenständigkeit
+\input{Eigenstaendigkeitserklaerung}
+
+\end{document}

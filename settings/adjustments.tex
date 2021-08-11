@@ -1,0 +1,88 @@
+%% Einstellungen zur Sprache und Silbentrennung im Dokument
+%
+% This is a document holding multiple languages.
+% Switch between ENGLISH and GERMAN by commenting one of the following lines:
+%\usepackage[ngerman,english]{babel} % makes ENGLISH content
+\usepackage[english,ngerman]{babel} % makes GERMAN content
+% this is the macro to define phrases in two languages:
+\newcommand{\babel}[2]{\ifnum\pdfstrcmp{\languagename}{english}=0 {#2}\else{#1}\fi}
+\newcommand{\DE}[1]{\ifnum\pdfstrcmp{\languagename}{ngerman}=0 {#1}\fi}
+\newcommand{\EN}[1]{\ifnum\pdfstrcmp{\languagename}{english}=0 {#1}\fi}
+% example:   \babel{Deutscher Text}{english text}
+% example:   \DE{deutscher Text}
+% example:   \EN{english text}
+%%%%%%%%%%%%%%%
+
+
+
+%% Abkürzungsverzeichnis
+\usepackage[intoc]{nomencl}
+
+\let\acro\nomenclature
+\renewcommand{\nomname}{\babel{Abkürzungsverzeichnis}{Abbreviations}}
+\setlength{\nomlabelwidth}{.25\hsize}
+\renewcommand{\nomlabel}[1]{#1 \dotfill}
+\setlength{\nomitemsep}{-\parsep}
+\makenomenclature
+
+%% Überschriften auch in Times-Roman setzen
+\addtokomafont{disposition}{\rmfamily}
+
+%% Kapitelnummer und Titel auf einer Zeile (erfordert die chapterprefix=false Option in class)
+\renewcommand*{\chapterformat}{%
+  \mbox{\chapapp~\thechapter:\enskip}%
+}
+
+%% Farbdefinitionen
+%  https://corporatedesign.htw-berlin.de/schrift-farbe/markenfarben/
+\definecolor{HKS66}{RGB}{118,185,0}          %% HKS51, HTW-Grün
+\definecolor{HKS47}{RGB}{0,130,209}      %% HKS47, HTW-Blau
+\newcommand{\headcolor}{HKS66}
+\newcommand{\alertcolor}{HKS47}
+
+% Zusätzliche Farben
+\definecolor{darkgreen}{RGB}{0,100,0}
+
+% Stichwortverzeichnis 
+\usepackage{imakeidx}
+\makeatletter
+\makeindex[columns=2, title=\babel{Stichwortverzeichnis}{Index}, options= -s settings/indexstyle.ist, intoc]
+\makeatother
+\indexsetup{level=\chapter*,toclevel=chapter}
+
+% Pluszeichen in der Referenz beim Zitieren entfernen: [Kra+13] wird zu [Kra13]
+\renewcommand*{\labelalphaothers}{}
+
+%% Darstellung von Quellcode incl. Syntax-Highlighting
+\usepackage{listings}
+\renewcommand{\lstlistlistingname}{\babel{Quelltextverzeichnis}{Listings}}
+
+%Anpassungen zur Quelltextdarstellung
+% muss bei Bedarf überschrieben werden (z.B. wenn unterschiedliche Sprachen zum Einsatz kommen)
+\renewcommand{\lstlistingname}{Codeauszug}
+\lstset{
+	language=Java,
+	numbers=left,
+	columns=fullflexible,
+	aboveskip=5pt,
+	belowskip=10pt,
+	basicstyle=\small\ttfamily,
+	backgroundcolor=\color{black!5},
+	commentstyle=\color{darkgreen},
+	keywordstyle=\color{blue},
+	stringstyle=\color{gray},
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	xleftmargin=16pt,
+	xrightmargin=0pt,
+	framesep=5pt,
+	framerule=3pt,
+	frame=leftline,
+	rulecolor=\color{green},
+	tabsize=2,
+	breaklines=true,
+	breakatwhitespace=true,
+	prebreak={\mbox{$\hookleftarrow$}}
+}
+

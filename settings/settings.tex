@@ -1,0 +1,81 @@
+% Wichtige Pakete und Grundeinstellungen, verwendet Dokumentenklasse "scrbook" 
+\documentclass[
+		chapterprefix=false, 
+		12pt, 
+		a4paper, 
+		twoside, 
+		parskip=half, 
+		listof=totoc, 
+		bibliography=totoc, 
+		numbers=noendperiod, 
+		captions=tableheading
+]{scrbook}
+
+%Anpassung der Seitenränder 
+%% Geometrisches ...
+\usepackage{geometry}
+\makeatletter
+\setlength\paperheight     {297mm}
+\setlength\paperwidth  	   {210mm}
+\setlength\headheight      {2ex}
+\setlength\headsep         {4ex} %2
+\setlength\footskip        {35pt} %25
+\setlength\textwidth       {150mm}
+\setlength\textheight      {240mm} %245
+\setlength{\@tempdima}     {\paperwidth}
+\addtolength{\@tempdima}   {-2in}
+\addtolength{\@tempdima}   {-\textwidth}
+\setlength\oddsidemargin   {0.5\@tempdima}
+\setlength\evensidemargin  {\oddsidemargin}
+\setlength{\@tempdima}     {\paperheight}
+\addtolength{\@tempdima}   {-3in}
+\addtolength{\@tempdima}   {-\textheight}
+\setlength\topmargin       {.5\@tempdima}
+\setlength\footnotesep     {12\p@}
+\setlength{\skip\footins}  {10\p@ \@plus 2\p@ \@minus 4\p@}
+\setlength{\marginparsep}  {1pt}
+\setlength{\marginparwidth}{20mm}
+\makeatother 
+
+
+%% Unterstützung von Umlauten und anderen Sonderzeichen (UTF-8)
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+%% Allgemeine Anpassungen 
+\usepackage{scrhack} %Tweaks für scrbook
+\usepackage[automark,headsepline]{scrlayer-scrpage} %Anpassung von Kopf- und Fußzeile
+\usepackage{paralist}  %Kompakte Listen
+\usepackage[onehalfspacing]{setspace} %Zeilenabstand 1,5
+\usepackage[stretch=10]{microtype} %Verbesserte Darstellung der Buchstaben zueinander
+\usepackage{float} %Unterstützung fester Positionierung  (H)
+
+%Glossar, Stichworverzeichnis (Akronyme als eigene Liste)
+%\usepackage[toc, acronym]{glossaries} 
+
+%% Mathematik:
+\RequirePackage{amssymb, amsmath}
+\RequirePackage{ifthen}
+\RequirePackage{ae,pifont}
+
+%% Erweiterte Tabellen:
+\usepackage{array, tabularx}
+\usepackage{multirow}
+\usepackage{longtable} %Umbrüche in Tabellen
+
+%% Grafiken:
+% Definition eigener Farben 
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{tikz} % Vektorgrafiken
+\usepackage{graphicx} % Pixelgrafiken (wie jpg, png, etc.)
+
+
+%Verknüpfungen im Dokument, Links werden durch "hidelink" nicht explizit hervorgehoben
+\usepackage[hidelinks,german]{hyperref}
+
+%% Erstellung von Literaturverzeichnissen mit Biber
+\usepackage{csquotes} %wird von biber benötigt
+\usepackage[style=alphabetic, backend=biber, bibencoding=ascii, natbib=true]{biblatex}
+\addbibresource{references/references.bib}
+

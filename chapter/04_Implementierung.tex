@@ -1,0 +1,138 @@
+%%
+%% Beuth Hochschule für Technik --  Abschlussarbeit
+%%
+%% Kapitel 4 - Implementierung
+%%
+%%
+
+\chapter{Implementierung} \label{Implementierung}
+
+\section{Aufbau der Implementierung}
+
+Die Implementierung der Lösung erfolgte in zwei Teilen. Es wurde die Hardware erstellt und zeitlich parallel dazu wurde die Software entwickelt. Beide Teile konnten relativ unabhängig voneinander implementiert werden. Die Schnittstelle von Hardware und Software ist das Zigbit-Modul ATZB-24-A2. Auf diesem Modul wird die fertige Software einprogrammiert. Die Hardware versorgt das Modul mit Energie und schaltet nach Softwarevorgaben die Steckdose ein und aus.
+
+
+
+\section{Contiki-Verzeichnisstruktur}
+%\section{Contiki Verzeichnisstruktur}
+
+Die Contiki-Verzeichnisstruktur besteht aus verschiedenen Unterverzeichnissen, die verschiedene Bedeutungen haben.
+
+\begin{lstlisting}[caption=Contiki-Verzeichnisstruktur mit ausgewählten Unterverzeichnissen]{Contiki Dateistruktur}
+/apps                                     
+    /ftp                                      
+    /ping6                                
+    /telnet                               
+    /telnetd                              
+    /twitter                              
+    /webserver                            
+    /webserver-nano                       
+    ...                                   
+/core                                    
+    /lib                                  
+    /net                                  
+    /sys                                  
+    ...
+/cpu
+    /arm
+    /avr
+    ...
+/doc
+/examples
+    /webserver-ipv6-raven
+    ...
+/platform
+    /avr-raven
+    /avr-zigbit
+    ...
+/tools
+\end{lstlisting}
+
+Das Verzeichnis /core beinhaltet das Kernstück von Contiki. Hier wird zum Beispiel das System im Unterverzeichnis /sys definiert. Das beinhaltet das Prozesshandling und Protothreads sowie verschiedene Timer. Ebenfalls befindet sich hier im Unterverzeichnis /net der Netzwerk-Stack aufbauend auf uIP. Zum Netzwerk-Stack gehört auch IEEE 802.15.4 und 6LoWPAN. Im Unterverzeichnis /lib stehen verschiedene libraries zur Verfügung.
+
+In den beiden Verzeichnissen /cpu und /platform ist die unterschiedliche Hardware beschrieben, die von Contiki unterstützt wird. Ein Programm, das auf einem Zigbit-Modul vom Hersteller Atmel geladen werden soll, verwendet die Verzeichnisse /platform/avr-zigbit und /cpu/avr.
+
+Das Verzeichnis /examples beinhaltet Beispielprojekte. Hier gibt es ein Projekt webserver-ipv6-raven. Anhand dieses Beispiels wird deutlich, was notwendig ist, um eine Webserver-Applikation für das Ravenboard zu kompilieren.
+
+Im Hauptverzeichnis gibt es eine Datei Makefile.include. Diese Datei ist Teil des Contiki-Makefile-Systems. Sie wird innerhalb eines Contiki-Projektes aufgerufen und bindet, abhängig von der Konfiguration des Projektes, die richtigen Dateien des Contiki-Systems ein.
+
+\subsection{Übersetzung eines Contiki-Programms}
+
+Ein Programm wird in Contiki mithilfe des Befehls "`make"' übersetzt. Am Beispiel des Projekts webserver-ipv6-raven soll exemplarisch gezeigt werden, wie das Makefile System funktioniert. Durch den Befehl "`make"' wird die Datei Makefile im gleichen Verzeichnis abgearbeitet.
+
+\begin{lstlisting}[caption=Auszug aus examples/webserver-ipv6-raven/Makefile]
+ifndef TARGET
+  TARGET=avr-raven
+  MCU=atmega1284p
+endif
+all:
+  ${MAKE} -f Makefile.webserver TARGET=$(TARGET) NOAVRSIZE=1 webserver6.elf
+\end{lstlisting}
+
+Hier wird das TARGET, also die Plattform, und die MCU, die Microcontroller Unit, gesetzt und dann die Datei Makefile.webserver aufgerufen. Dabei wird der Parameter NOAVRSIZE gesetzt, um beim Übersetzen eine zusätzliche Ausgabe zur Speicherbelegung (avr-size) zu unterdrücken. Das Programm wird als Datei webserver6.elf erstellt.
+
+\begin{lstlisting}[caption=Auszug aus examples/webserver-ipv6-raven/Makefile.webserver]
+all: webserver6
+APPS=raven-webserver raven-lcd-interface
+UIP_CONF_IPV6=1
+CONTIKI = ../..
+include $(CONTIKI)/Makefile.include
+\end{lstlisting}
+
+In der Datei Makefile.webserver werden die Applikationen raven-webserver und raven-lcd-interface über die Variable APPS eingebunden. Es wird eine Compiler Variable UIP\_CONF\_IPV6 gesetzt, um IPv6 zu aktivieren, und das Haupt-Makefile Makefile.include wird eingebunden.
+
+\begin{lstlisting}[caption=Auszug aus examples/webserver-ipv6-raven/webserver6.c]
+#include "webserver-nogui.h"
+/*--------------------------------------------------------------------*/
+AUTOSTART_PROCESSES(&webserver_nogui_process);
+/*--------------------------------------------------------------------*/
+\end{lstlisting}
+
+In der Datei webserver6.c wird ausgewählt, welche Contiki-Prozesse automatisch gestartet werden sollen. In unserem Beispiel ist das der Prozess "`webserver\_nogui\_process"'. Dieser Prozess ist Teil der Applikation raven-webserver.
+
+
+
+\subsection{Programmieren eines Mikrocontrollers}
+
+
+Durch Übersetzung des Contiki-Beispielprojektes webserver-ipv6-raven wird eine Datei "`webserver6.elf"' im ELF Format erzeugt. Hiervon wird eine Kopie "`webserver6-avr-raven.elf"' erstellt. Diese Datei enthält Informationen darüber, was in den Flash und in den EEPROM des AVR Mikrocontrollers geladen werden muss. Ebenfalls beinhaltet es Informationen über das Setzen der Fuse Bits. Fuse Bits sind Einstellungen des Mikrocontrollers, die nicht von der Software geändert werden können. Sie schalten gewisse Funktionen, zum Beispiel woher die Taktfrequenz bezogen wird, ein oder aus.
+
+\begin{lstlisting}[caption=Auszug aus examples/webserver-ipv6-raven/Makefile]
+TARGET=avr-raven
+MCU=atmega1284p
+OUTFILE=webserver6-$(TARGET)
+avr-objcopy -O ihex -R .eeprom -R .fuse -R .signature \
+            $(OUTFILE).elf $(OUTFILE).hex
+avr-size -C --mcu=$(MCU) $(OUTFILE).elf
+\end{lstlisting}
+
+Durch zusätzliche Befehle im Makefile wird eine Datei "`webserver6-avr-raven.hex"' erzeugt. Diese Datei enthält den Inhalt, der in den Flash geschrieben werden soll, im Intel-HEX-Format. Mit dem "`avr-size"'-Befehl wird die Anzahl der Bytes angezeigt, die im Flash, im RAM und im EEPROM benötigt werden. Dies kann mit dem zur Verfügung stehenden Speicher verglichen werden.
+
+\begin{lstlisting}[caption=Ausgabe vom Befehl "`avr-size"']
+AVR Memory Usage
+----------------
+Device: atmega1284p
+
+Program:   70874 bytes (54.1% Full)
+(.text + .data + .bootloader)
+
+Data:      13013 bytes (79.4% Full)
+(.data + .bss + .noinit)
+
+EEPROM:       63 bytes (1.5% Full)
+(.eeprom)
+\end{lstlisting}
+
+Durch Hinzufügen eines zusätzlichen Befehls ins Makefile kann eine Datei "`webserver6-avr-raven\_eeprom.hex"' erzeugt werden. Diese Datei enthält dann den Inhalt im Intel-HEX-Format, der in den EEPROM geschrieben werden soll. Mit den beiden Dateien im Intel-HEX-Format ist es möglich, den Mikrocontroller mit einem Programmiergerät zu beschreiben, das kein ELF Format lesen kann.
+
+\begin{lstlisting}[caption=Befehl um eeprom.hex zu erzeugen]
+avr-objcopy -O ihex -j .eeprom \
+            -set-section-flags=.eeprom="alloc,load" --change-section-lma \
+            .eeprom=0 $(OUTFILE).elf $(OUTFILE)_eeprom.hex
+\end{lstlisting}
+
+
+Mittels des Programms Atmel Studio 6 werden wahlweise die erzeugten Dateien im Intel-HEX-Format oder die erzeugte Datei im ELF Format in den Flash und in den EEPROM des Mikrocontrollers programmiert. Zu Beginn wurde das Beispielprojekt webserver-ipv6-raven auf den Mikrocontroller AT-Mega1284P eines Atmel Ravenboard programmiert. Dabei wurde die Programmierschnittstelle ISP und das Programmiergerät Atmel STK500 verwendet.
+
+Später bei der entwickelten Hardware wurde die Programmierschnittstelle JTAG und das Programmiergerät Atmel JTAGICE3 verwendet.
+

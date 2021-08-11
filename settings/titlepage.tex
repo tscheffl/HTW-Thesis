@@ -1,0 +1,160 @@
+
+% Variablendefinition und deren Voreinstellung festlegen
+%
+
+%% Variablen
+\newboolean{@pdfused}           \setboolean{@pdfused}{false}
+\newboolean{@entwurfset}        \setboolean{@entwurfset}{true}
+\newboolean{@abgabeset}         \setboolean{@abgabeset}{true}
+\newboolean{@versionset}        \setboolean{@versionset}{true}
+\newboolean{@versionsdatum}      \setboolean{@versionsdatum}{true}
+
+%
+\newcommand{\version}[1]{\setboolean{@versionset}{true} 
+ \renewcommand{\theversion}{#1}} 
+\newcommand{\datum}[1]{\renewcommand{\thedatum}{#1}}
+\newcommand{\autor}[1]{\renewcommand{\theautor}{#1}}
+\newcommand{\matrikelnr}[1]{\renewcommand{\thematrikelnr}{#1}}
+\newcommand{\titel}[1]{\renewcommand{\thetitel}{#1}}
+\newcommand{\untertitel}[1]{\renewcommand{\theuntertitel}{#1}}
+\newcommand{\fachbereich}[1]{\renewcommand{\thefachbereich}{#1}}
+\newcommand{\studiengang}[1]{\renewcommand{\thestudiengang}{#1}}
+\newcommand{\thesistyp}[1]{\renewcommand{\thethesistyp}{#1}}
+\newcommand{\abschluss}[1]{\renewcommand{\theabschluss}{#1}}
+\newcommand{\firstExaminer}[1]{\renewcommand{\thefirstExaminer}{#1}}
+\newcommand{\secondExaminer}[1]{\renewcommand{\thesecondExaminer}{#1}}
+\newcommand{\betreuerFeld}[1]{\renewcommand{\thebetreuerFeld}{#1}}
+
+%
+\newcommand{\theversion}{0.0}      
+\newcommand{\thedatum}{\today}
+\newcommand{\theautor}{Autor angeben!}
+\newcommand{\thematrikelnr}{123 456}
+\newcommand{\thetitel}{Titel angeben!}
+\newcommand{\theuntertitel}{}
+\newcommand{\thefachbereich}{Fachbereich angeben}
+\newcommand{\thestudiengang}{Studiengang angeben}
+\newcommand{\thethesistyp}{Bachelorarbeit}
+\newcommand{\theabschluss}{Bachelor of Engineering (B.Eng.)}
+\newcommand{\thefirstExaminer}{Betreuer 1}
+\newcommand{\thesecondExaminer}{Betreuer 2}
+\newcommand{\thebetreuerFeld}{}
+
+\betreuerFeld{
+  \begin{tabular}{llr}
+    Erstgutachten und Betreuung: & \thefirstExaminer \\
+    Zweitgutachten: & \thesecondExaminer \\
+  \end{tabular}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\maketitle}{\htwTitelSeite}
+
+%% Optionen
+
+\DeclareOption{entwurf}
+    {
+      \setboolean{@entwurfset}{true}
+      \setboolean{@abgabeset}{false}
+    }
+
+\DeclareOption{abgabe}
+    {
+      \setboolean{@entwurfset}{false}
+      \setboolean{@abgabeset}{true}
+    }
+
+
+
+%% Setzen des defaults und verarbeiten
+\ExecuteOptions{abgabe}     %TODO für Abgabe auf abgabe setzen
+\ProcessOptions 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\hslogo}{pictures/Logo_HTW_Berlin.pdf}
+\newcommand{\hslogoscaled}[1]{{\mbox{\includegraphics[width=#1]\hslogo}}}
+
+\newcommand{\hsfont}{}%    {\fontfamily{phv}\fontseries{m}\fontshape{n}\selectfont}
+\newcommand{\hsheadfont}{}%{\fontfamily{phv}\fontseries{b}\fontshape{n}\selectfont}
+
+\newcommand{\htwTitelSeite}
+    {
+      \thispagestyle{empty}
+      \parindent=0pt
+      \begin{minipage}[b]{0.65\textwidth}
+       
+        \ifthenelse{\boolean{@entwurfset}}
+            {
+              \begin{hsfont}
+                \begin{tiny}
+                  \raggedright
+                  % Versionsnummer, wenn gesetzt
+                  \ifthenelse{\boolean{@versionset}}
+                       {Version \theversion\\}
+                       {}
+                       % Datum der letzten Änderung, falls gewünscht
+	               \ifthenelse{\boolean{@versionsdatum}}
+                       {letzte Änderung: \today \\}
+		       {}
+                \end{tiny}
+              \end{hsfont}
+            }
+            {              
+              % leer
+              ~\hfill~
+            }
+      \end{minipage}
+      
+      \begin{minipage}[b]{0.35\textwidth}
+      \vskip -2em
+      \hfill  \hslogoscaled{\textwidth}
+      \end{minipage}
+
+      \textcolor{HKS66}{\rule{\linewidth}{.4mm}}
+      \vspace*{\stretch{1}}
+      \begin{center}
+        \begin{hsheadfont}
+          \textcolor{\headcolor}{\LARGE \textbf{\thetitel}}
+        \end{hsheadfont}
+      \end{center}
+      \vspace*{\stretch{0.5}}
+      %
+      \begin{hsheadfont}
+        \begin{center}
+          \textbf{\Large{\thethesistyp}}
+        \end{center}
+      \end{hsheadfont}
+      \vspace*{\stretch{0.5}}
+      %
+      \begin{center}
+        \begin{hsfont}
+          von\\[2ex]
+          {\textbf{\large\theautor}}\\[2ex]
+          Matrikelnummer: \thematrikelnr\\[2ex]
+          Fachbereich \thefachbereich\\
+          der Hochschule für Technik und Wirtschaft Berlin\\[2ex]
+          zur Erlangung des akademischen Grades\\
+          \textbf{\theabschluss}\\
+          im Studiengang\\
+          \textbf{\thestudiengang}
+        \end{hsfont}
+      \end{center}
+     
+      \vspace*{\stretch{1}}
+       \begin{center}
+         Tag der Abgabe: \thedatum 
+       \end{center}
+         
+      \vspace*{\stretch{1}}
+      
+      \thebetreuerFeld
+      
+      %
+      \vspace*{\stretch{2}}
+
+      \textcolor{HKS66}{\rule{\linewidth}{0.4mm}}\\[1.5ex]
+       \begin{hsheadfont}
+         % leer
+         ~\hfill~
+       \end{hsheadfont}
+    }
