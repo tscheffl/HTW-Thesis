@@ -8,7 +8,7 @@ In der Hauptdatei `thesis.tex` müssen die allgemeinen Angaben zum Author und Ti
 Um die Verzeichnisse (Literatur, Abkürzungen und Index) zu erstellen sind folgende Befehle und ein weiterer LaTeX Lauf notwendig:
   
   *   `biber Thesis`
-  *   	`makeindex Thesis.nlo -s nomencl.ist -o Thesis.nls`
+  *   `makeindex Thesis.nlo -s nomencl.ist -o Thesis.nls`
   *   `makeindex Thesis`
   
   
