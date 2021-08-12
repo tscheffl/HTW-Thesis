@@ -1,3 +1,10 @@
+%%
+%%  Hochschule für Technik und Wirtschaft Berlin --  Abschlussarbeit
+%%
+%%  Hauptdokument
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %% Einstellungen und Anpassungen
 \input{settings/settings}  		% Import der Pakete und Stil de Dokuments
 \input{settings/adjustments} 	% Weitere Pakete und Anpassungen (Sprache, etc.)
@@ -77,7 +84,7 @@
 
 
 %% Abkürzungsverzeichnis
-% Befehl: 	makeindex Thesis.nlo -s nomencl.ist -o Thesis.nls
+% 	Befehl: makeindex Thesis.nlo -s nomencl.ist -o Thesis.nls
 %
 \input{references/acronyms.tex}
 \cleardoublepage
@@ -94,13 +101,12 @@
 \lstlistoflistings \clearpage
 
 %% Stichwortverzeichnis
-% Befehl: 	makeindex thesis
+%	Befehl: makeindex Thesis
 %
 \printindex \clearpage
 
 %% Literaturverzeichnis
-%
-% Befehl: biber thesis
+%	Befehl: biber Thesis
 %
 \printbibliography[heading=bibintoc, title={\babel{Literaturverzeichnis}{Bibliography}}]\clearpage
 %Literaturverzeichnisse getrennt nach Stichwort
