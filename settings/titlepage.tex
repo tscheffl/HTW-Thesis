@@ -3,7 +3,6 @@
 %
 
 %% Variablen
-\newboolean{@pdfused}           \setboolean{@pdfused}{false}
 \newboolean{@entwurfset}        \setboolean{@entwurfset}{true}
 \newboolean{@abgabeset}         \setboolean{@abgabeset}{true}
 \newboolean{@versionset}        \setboolean{@versionset}{true}
@@ -71,8 +70,8 @@
 \ProcessOptions 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\hslogo}{pictures/Logo_HTW_Berlin.pdf}
-\newcommand{\hslogoscaled}[1]{{\mbox{\includegraphics[width=#1]\hslogo}}}
+%\newcommand{\hslogo}{pictures/Logo_HTW_Berlin.pdf}
+%\newcommand{\hslogoscaled}[1]{{\mbox{\includegraphics[width=#1]\hslogo}}}
 
 \newcommand{\hsfont}{}%    {\fontfamily{phv}\fontseries{m}\fontshape{n}\selectfont}
 \newcommand{\hsheadfont}{}%{\fontfamily{phv}\fontseries{b}\fontshape{n}\selectfont}
@@ -107,7 +106,14 @@
       
       \begin{minipage}[b]{0.35\textwidth}
       \vskip -2em
-      \hfill  \hslogoscaled{\textwidth}
+      \hfill  %\hslogoscaled{\textwidth}
+%      \Ifpdfoutput{
+%                  \message{PDF Output}
+                  \mbox{\includegraphics[width=\textwidth]{pictures/Logo_HTW_Berlin}}
+%                  }{
+%                 \mbox{\includegraphics[width=\textwidth]{pictures/Logo_HTW_Berlin.eps}}
+%                  \message{Kein PDF Output}
+%                  }
       \end{minipage}
 
       \textcolor{HKS66}{\rule{\linewidth}{.4mm}}
