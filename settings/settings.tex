@@ -40,8 +40,10 @@
 
 %% Unterstützung von Umlauten und anderen Sonderzeichen (UTF-8)
 \usepackage{lmodern}
+\usepackage{eurosym}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\DeclareUnicodeCharacter{20AC}{\euro} %Euro-Symbol in UTF-8
 
 %% Allgemeine Anpassungen 
 \usepackage{scrhack} %Tweaks für scrbook
@@ -50,6 +52,7 @@
 \usepackage[onehalfspacing]{setspace} %Zeilenabstand 1,5
 \usepackage[stretch=10]{microtype} %Verbesserte Darstellung der Buchstaben zueinander
 \usepackage{float} %Unterstützung fester Positionierung  (H)
+\usepackage{csquotes} %wird von babel benötigt
 
 %Glossar, Stichworverzeichnis (Akronyme als eigene Liste)
 %\usepackage[toc, acronym]{glossaries} 
@@ -67,15 +70,13 @@
 %% Grafiken:
 % Definition eigener Farben 
 \usepackage[table,xcdraw]{xcolor}
-%\PassOptionsToPackage{dvipdfmx}{graphicx}
 \usepackage{tikz} % Vektorgrafiken, lädt graphicx automatisch
-%\usepackage[dvipdfm]{graphicx} % Pixelgrafiken (wie jpg, png, etc.)
-%\usepackage[dvipdfmx]{graphicx} 
-%\usepackage{bmpsize} 
+\usepackage{bmpsize} 
 
 %Verknüpfungen im Dokument, Links werden durch "hidelink" nicht explizit hervorgehoben
 %\PassOptionsToPackage{hyphens}{url}
 \usepackage[hidelinks,german]{hyperref}
+%\hypersetup{breaklinks=true}
 \usepackage{breakurl}
 %\expandafter\def\expandafter\UrlBreaks\expandafter{\UrlBreaks% save the current one
 %  \do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j%
@@ -84,10 +85,3 @@
 %  \do\E\do\F\do\G\do\H\do\I\do\J\do\K\do\L\do\M\do\N%
 %  \do\O\do\P\do\Q\do\R\do\S\do\T\do\U\do\V\do\W\do\X%
 %  \do\Y\do\Z\do\*\do\-\do\~\do\'\do\"\do\-}%
-
-
-%% Erstellung von Literaturverzeichnissen mit Biber
-\usepackage{csquotes} %wird von biber benötigt
-\usepackage[style=alphabetic, backend=biber, bibencoding=ascii, natbib=true]{biblatex}
-\addbibresource{references/references.bib}
-

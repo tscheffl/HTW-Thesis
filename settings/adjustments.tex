@@ -1,4 +1,4 @@
-%% Einstellungen zur Sprache und Silbentrennung im Dokument
+%%% Einstellungen zur Sprache und Silbentrennung im Dokument
 %
 % This is a document holding multiple languages.
 % Switch between ENGLISH and GERMAN by commenting one of the following lines:
@@ -14,10 +14,17 @@
 %%%%%%%%%%%%%%%
 
 
+%%% Erstellung von Literaturverzeichnissen mit Biblatex (Biber/Bibtex)
+% wählen Sie hier die für Ihr Latex-System nötige Quellenverarbeitung:
+\usepackage[style=alphabetic, backend=biber,   natbib=true]{biblatex}.  %Biber
+%\usepackage[style=alphabetic, backend=bibtex, natbib=true]{biblatex} %Bibtex
+%
+% Bibtex-Datei mit den Quellenangaben zur Arbeit
+\addbibresource{references/references.bib}
 
-%% Abkürzungsverzeichnis
+
+%%% Abkürzungsverzeichnis
 \usepackage[intoc]{nomencl}
-
 \let\acro\nomenclature
 \renewcommand{\nomname}{\babel{Abkürzungsverzeichnis}{Abbreviations}}
 \setlength{\nomlabelwidth}{.25\hsize}
@@ -25,39 +32,38 @@
 \setlength{\nomitemsep}{-\parsep}
 \makenomenclature
 
-%% Überschriften auch in Times-Roman setzen
+%%% Überschriften auch in Times-Roman setzen
 \addtokomafont{disposition}{\rmfamily}
 
-%% Kapitelnummer und Titel auf einer Zeile (erfordert die chapterprefix=false Option in class)
+%%% Kapitelnummer und Titel auf einer Zeile (erfordert die chapterprefix=false Option in class)
 \renewcommand*{\chapterformat}{%
   \mbox{\chapapp~\thechapter:\enskip}%
 }
 
-%% Farbdefinitionen
+%%% Farbdefinitionen
 %  https://corporatedesign.htw-berlin.de/schrift-farbe/markenfarben/
 \definecolor{HKS66}{RGB}{118,185,0}          %% HKS51, HTW-Grün
 \definecolor{HKS47}{RGB}{0,130,209}      %% HKS47, HTW-Blau
 \newcommand{\headcolor}{HKS66}
 \newcommand{\alertcolor}{HKS47}
-
 % Zusätzliche Farben
 \definecolor{darkgreen}{RGB}{0,100,0}
 
-% Stichwortverzeichnis 
+
+%%% Stichwortverzeichnis 
 \usepackage{imakeidx}
 \makeatletter
 \makeindex[columns=2, title=\babel{Stichwortverzeichnis}{Index}, options= -s settings/indexstyle.ist, intoc]
 \makeatother
 \indexsetup{level=\chapter*,toclevel=chapter}
-
 % Pluszeichen in der Referenz beim Zitieren entfernen: [Kra+13] wird zu [Kra13]
 \renewcommand*{\labelalphaothers}{}
 
-%% Darstellung von Quellcode incl. Syntax-Highlighting
+
+%%% Darstellung von Quellcode incl. Syntax-Highlighting
 \usepackage{listings}
 \renewcommand{\lstlistlistingname}{\babel{Quelltextverzeichnis}{Listings}}
-
-%Anpassungen zur Quelltextdarstellung
+%Anpassungen zur Quellcodedarstellung
 % muss bei Bedarf überschrieben werden (z.B. wenn unterschiedliche Sprachen zum Einsatz kommen)
 \renewcommand{\lstlistingname}{Codeauszug}
 \lstset{

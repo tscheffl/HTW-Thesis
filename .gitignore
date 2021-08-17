@@ -6,3 +6,5 @@
 *.bbl
 *.nlo
 *.lol
+*.aux
+*.out
