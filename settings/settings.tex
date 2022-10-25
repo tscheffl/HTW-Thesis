@@ -1,7 +1,6 @@
 % Wichtige Pakete und Grundeinstellungen, verwendet Dokumentenklasse "scrbook" 
 \documentclass[
 		chapterprefix=false, 
-		12pt, 
 		a4paper, 
 		twoside, 
 		parskip=half, 
@@ -13,24 +12,25 @@
 
 %Anpassung der Seitenränder 
 %% Geometrisches ...
-\usepackage{geometry}
+\usepackage[inner=3cm]{geometry}
 \makeatletter
 \setlength\paperheight     {297mm}
 \setlength\paperwidth  	   {210mm}
-\setlength\headheight      {2ex}
+%\setlength\headheight      {2ex}
 \setlength\headsep         {4ex} %2
 \setlength\footskip        {35pt} %25
-\setlength\textwidth       {150mm}
+\setlength\textwidth       {155mm}
 \setlength\textheight      {240mm} %245
-\setlength{\@tempdima}     {\paperwidth}
-\addtolength{\@tempdima}   {-2in}
-\addtolength{\@tempdima}   {-\textwidth}
-\setlength\oddsidemargin   {0.5\@tempdima}
-\setlength\evensidemargin  {\oddsidemargin}
-\setlength{\@tempdima}     {\paperheight}
-\addtolength{\@tempdima}   {-3in}
-\addtolength{\@tempdima}   {-\textheight}
-\setlength\topmargin       {.5\@tempdima}
+%\setlength{\@tempdima}     {\paperwidth}
+%\addtolength{\@tempdima}   {-2in}
+%\addtolength{\@tempdima}   {-\textwidth}
+%\setlength\oddsidemargin   {0.5\@tempdima} %replaced by 'inner'
+%\setlength\evensidemargin  {\oddsidemargin} %replaced by 'inner'
+%\setlength{\@tempdima}     {\paperheight}
+%\addtolength{\@tempdima}   {-3in}
+%\addtolength{\@tempdima}   {-\textheight}
+%\setlength\topmargin       {.5\@tempdima}
+\setlength\topmargin       {-1,2cm}
 \setlength\footnotesep     {12\p@}
 \setlength{\skip\footins}  {10\p@ \@plus 2\p@ \@minus 4\p@}
 \setlength{\marginparsep}  {1pt}
@@ -38,8 +38,14 @@
 \makeatother 
 
 
-%% Unterstützung von Umlauten und anderen Sonderzeichen (UTF-8)
+%% Scalable fonts
 \usepackage{lmodern}
+%% set font size (needs to be loaded after \begin{document})
+\AtBeginDocument{%
+  \KOMAoption{fontsize}{11.5pt}%
+%  \recalctypearea % not needed because use of geometry package
+}
+%% Unterstützung von Umlauten und anderen Sonderzeichen (UTF-8)
 \usepackage{eurosym}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -49,7 +55,10 @@
 \usepackage{scrhack} %Tweaks für scrbook
 \usepackage[automark,headsepline]{scrlayer-scrpage} %Anpassung von Kopf- und Fußzeile
 \usepackage{paralist}  %Kompakte Listen
-\usepackage[onehalfspacing]{setspace} %Zeilenabstand 1,5
+%\usepackage[onehalfspacing]{setspace} %Zeilenabstand 1,5
+\usepackage{setspace} %flexibler Zeilenabstand
+\setstretch{1.15} %Zeilenabstand 1.1
+
 \usepackage[stretch=10]{microtype} %Verbesserte Darstellung der Buchstaben zueinander
 \usepackage{float} %Unterstützung fester Positionierung  (H)
 \usepackage{csquotes} %wird von babel benötigt
@@ -64,6 +73,7 @@
 
 %% Erweiterte Tabellen:
 \usepackage{array, tabularx}
+\setlength\extrarowheight{2pt} %extra Top-Padding in Latex-Tabellen
 \usepackage{multirow}
 \usepackage{longtable} %Umbrüche in Tabellen
 
@@ -75,7 +85,7 @@
 
 %Verknüpfungen im Dokument, Links werden durch "hidelink" nicht explizit hervorgehoben
 %\PassOptionsToPackage{hyphens}{url}
-\usepackage[hidelinks,german]{hyperref}
+\usepackage[hidelinks,german,hypertexnames=false]{hyperref}
 %\hypersetup{breaklinks=true}
 \usepackage{breakurl}
 %\expandafter\def\expandafter\UrlBreaks\expandafter{\UrlBreaks% save the current one

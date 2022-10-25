@@ -80,7 +80,7 @@ CONTIKI = ../..
 include $(CONTIKI)/Makefile.include
 \end{lstlisting}
 
-In der Datei Makefile.webserver werden die Applikationen raven-webserver und raven-lcd-interface über die Variable APPS eingebunden. Es wird eine Compiler Variable UIP\_CONF\_IPV6 gesetzt, um IPv6 zu aktivieren, und das Haupt-Makefile Makefile.include wird eingebunden.
+In der Datei Makefile.webserver werden die Applikationen raven-webserver und raven-lcd-interface über die Variable APPS eingebunden. Die Compiler Variable \texttt{UIP\_CONF\_IPV6} wird gesetzt, um IPv6 zu aktivieren, weiterhin wird das Haupt-Makefile \texttt{Makefile.include} eingebunden.
 
 \begin{lstlisting}[caption=Auszug aus examples/webserver-ipv6-raven/webserver6.c]
 #include "webserver-nogui.h"

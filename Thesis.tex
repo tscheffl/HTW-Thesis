@@ -12,7 +12,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% In diesem Bereich müssen Sie Anpassungen für das Deckblatt der Arbeit vornehmen!
+%% Im folgenden Bereich müssen Sie Anpassungen für das Deckblatt der Arbeit vornehmen!
 %
 %% Titel und Author 
 \titel{Analyse, Planung und Implementierung einer internetfähigen Steuerung}
@@ -20,7 +20,7 @@
 \matrikelnr{s1234567}
 %% Version und Abgabedatum
 \version{0.2$\alpha$} 	%ToDo: wird derzeit noch nicht genutzt
-\datum{07.04.2021}   	% Abgabedatum der Arbeit
+\datum{07.04.2022}   	% Abgabedatum der Arbeit
 %% Typ der Arbeit
 \thesistyp{Masterarbeit}
 %\thesistyp{Bachelorarbeit}
@@ -35,14 +35,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%% Metadaten zu PDF hinzufügen
+\hypersetup{
+pdftitle = {\thetitel},
+pdfsubject = {\thethesistyp},
+pdfauthor = {\theautor},
+%pdfkeywords = {Stichwort1, Stichwort2 ...} ,
+pdfcreator = {LaTeX with hyperref},
+pdfproducer = {pdflatex}
+}
 %% Pfad zu den Bildern
 \graphicspath{
   {pictures/},
 }
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %% Start des Dokuments
 \begin{document}
 
@@ -53,7 +58,6 @@
 \cleardoubleoddpage
 \pagenumbering{Roman}
 \tableofcontents \clearpage
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% In diesem Bereich müssen Sie Anpassungen für den Inhalt der Arbeit vornehmen!
