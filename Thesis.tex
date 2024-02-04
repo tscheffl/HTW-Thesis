@@ -11,8 +11,8 @@
 \input{settings/titlepage}		% Layout der Titelseite
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Im folgenden Bereich müssen Sie Anpassungen für das Deckblatt der Arbeit vornehmen!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Im folgenden Bereich müssen Sie Anpassungen für das Deckblatt der Arbeit vornehmen!
 %
 %% Titel und Author 
 \titel{Analyse, Planung und Implementierung einer internetfähigen Steuerung}
@@ -33,7 +33,7 @@
 \fachbereich{1 -- Energie und Information --}
 \studiengang{Informations- und Kommunikationstechnik}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Ende des Bereichs für Anpassungen
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Metadaten zu PDF hinzufügen
 \hypersetup{
@@ -48,7 +48,19 @@ pdfproducer = {pdflatex}
 \graphicspath{
   {pictures/},
 }
+%% Current Bug-Fixes
+% 2024-02 
+% Error-Message ! Argument of \MT@gobble@to@nil has an extra }.
+% https://tex.stackexchange.com/questions/702778/argument-of-mtgobbletonil-has-an-extra
+\microtypesetup{nopatch=item}
+
+%% Custom includes go here!!!
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Start des Dokuments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
 %% Deckblatt erzeugen
@@ -85,7 +97,6 @@ pdfproducer = {pdflatex}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 %% Abkürzungsverzeichnis
 % 	Befehl: makeindex Thesis.nlo -s nomencl.ist -o Thesis.nls

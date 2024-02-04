@@ -8,6 +8,17 @@ Die Vorlage ist für die Erstellung von Arbeiten in deutscher und englischer Spr
 
 In der Hauptdatei `Thesis.tex` müssen die allgemeinen Angaben zum Author und Titel, usw. in die passenden Felder eingetragen werden. Die einzelnen Kapitel werden dann per `/input{}` importiert.
 
+Eigene Packages können hier vor dem Abschnitt `\begin{document}` eingefügt werden.
+
+
+## Verwendung von Anführungszeichen in deutschen Texten
+
+In LaTeX ist es leider nicht einfach Anführungszeichen für deutsche Texte zu verwenden. Es müssen spezielle Packages oder Befehle verwendet werden. Die einfache Eingabe von `".." ` führt in der Regel zu unvorhergesehenen Ergebnissen.
+
+Diese Vorlage verwendet das Package [csquotes](https://ctan.org/pkg/csquotes?lang=de). Normaler Text lässt sich mit dem Befehl `\enquote{Text in Anführungszeichen}` in Anführungszeichen setzen.
+Zitate können z.B. mit `\blockquote{}` vom restlichen Text abgesetzt werden.
+Ich empfehle immer zu prüfen, ob Anführungszeichen wirklich notwendig sind. Um bestimmte Begriffe optisch hervorzuheben, sollten Sie besser `\emph{}` verwenden.
+
 ## Erstellung des PDF-Dokuments
 
 Um die Verzeichnisse (Literatur, Abkürzungen und Index) zu erstellen sind folgende Befehle und ein weiterer LaTeX Lauf notwendig:
