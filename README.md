@@ -30,6 +30,11 @@ Um die Verzeichnisse (Literatur, Abkürzungen und Index) zu erstellen sind folge
   
 **Hinweis:** Alternativ kann für die Erstellung des Literaturverzeichnis statt `biber` auch `bibtex` verwendet werden. Dazu muss in der Datei `settings/adjustments.tex` im Bereich Literaturverarbeitung das passende Kommando ausgewählt werden.
 
+### Verwendung von biber mit einem graphischen LaTeX-Editor
+
+Unter dem folgenden [Link](https://texwelt.de/fragen/1909/wie-verwende-ich-biber-in-meinem-editor) finden Sie Anleitungen zur Einbindung von `biber` in ihren graphischen LaTeX-Editor.
+
+
 ## Kontakt:
 
 Probleme und Ergänzungsvorschläge bitte per Email an [thomas.scheffler@htw-berlin.de](mailto:thomas.scheffler@htw-berlin.de?subject=Github:%20HTW-LaTeX-Vorlage) melden.
