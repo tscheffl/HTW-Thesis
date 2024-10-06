@@ -1,14 +1,24 @@
 # HTW-Thesis
-LaTeX Template für Abschlussarbeiten im Studiengang IKT der [HTW-Berlin](https://ikt-bachelor.htw-berlin.de/)
+LaTeX Template für Abschlussarbeiten im Studiengang Informations- und Kommunikationstechnik (IKT) der [HTW-Berlin](https://ikt-bachelor.htw-berlin.de/)
 
 ## Notwendige Anpassungen in der Vorlage
 
 Die Vorlage ist für die Erstellung von Arbeiten in deutscher und englischer Sprache geeignet. Die Umstellung der Sprache erfolgt in der Datei `settings/adjustments.tex`
 
-
 In der Hauptdatei `Thesis.tex` müssen die allgemeinen Angaben zum Author und Titel, usw. in die passenden Felder eingetragen werden. Die einzelnen Kapitel werden dann per `/input{}` importiert.
 
 Eigene Packages können hier vor dem Abschnitt `\begin{document}` eingefügt werden.
+
+
+## Verwendung der Vorlage in Overleaf
+
+Die Dateien der Vorlage können bei Overleaf hochgeladen und damit bequem im Browser bearbeitet werden.
+
+Bei der erstmaligen Nutzung in Overleaf ist zu beachten, dass Overleaf manchmal Problem hat die Hauptdatei `Thesis.tex` zu finden. Statt dessen wird eine andere Tex-Datei (meistens `settings.tex`) übersetzt und die Übersetzung bricht mit der Fehlermeldung `job aborted, no legal \end found` ab.
+
+Geben Sie daher bei Overleaf die korrekte Hauptdatei `Thesis.tex` bekannt.  
+Die Anleitung dazu finden Sie hier: <https://de.overleaf.com/learn/how-to/Set_Main_Document>  
+Anschließend sollte sich die Vorlage korrekt übersetzen lassen.
 
 
 ## Verwendung von Anführungszeichen in deutschen Texten
